@@ -2,14 +2,15 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Minimalista</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tienda Minimalista | KBDA</title>
     <link rel="stylesheet" href="css.css">
+    <!-- Iconos Font Awesome para Celulares -->
     <link rel="stylesheet" href="https://cloudflare.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com" rel="stylesheet">
-    <script  defer src="js.js" defer></script>
+    <link href="https://googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
+    <script defer src="js.js"></script>
 </head>
 <body>
 
@@ -21,9 +22,7 @@
         <div class="logo-container">
             <img src="logo.png" alt="Logo Principal" class="logo-main">
         </div>
-        <div class="header-spacer"></div>
     </header>  
-
 
     <main class="slider-section-ambient">
         <button class="arrow-btn prev-arrow" id="prevBtn">❮</button>
@@ -31,25 +30,21 @@
         <div class="slider-wrapper-ambient" id="sliderWrapper">
             <div class="slider-track-ambient" id="sliderTrack">
                 
-                <!-- Producto 1 -->
                 <div class="ambient-card">
                     <img src="img1.png" alt="Product one">
                     <div class="ambient-label">Page one</div>
                 </div>
 
-                <!-- Producto 2 -->
                 <div class="ambient-card">
                     <img src="img2.jpg" alt="Product two">
                     <div class="ambient-label">Page two</div>
                 </div>
 
-                <!-- Producto 3 -->
                 <div class="ambient-card">
                     <img src="img3.jpg" alt="Product three">
                     <div class="ambient-label">Page three</div>
                 </div>
 
-                <!-- Producto 4 -->
                 <div class="ambient-card">
                     <img src="img4.png" alt="Product four">
                     <div class="ambient-label">Page four</div>
@@ -65,20 +60,17 @@
         
         <button class="arrow-btn next-arrow" id="nextBtn">❯</button>
 
-        <!-- Barra de progreso inferior (Sustituye a los puntos) -->
         <div class="progress-bar-container">
             <div class="progress-bar-fill" id="progressBar"></div>
         </div>
     </main>
 
-    <!-- Banner Llamada a la Acción -->
     <section class="cta-banner-container">
         <a href="#" class="cta-banner-btn">
             HAGAMOS REALIDAD TU IDEA <span class="arrow">→</span>
         </a>
     </section>
 
-    <!-- Sección de Beneficios -->
     <section class="features-section">
         <div class="feature-item">
             <i class="fa-solid fa-shield-halved feature-icon"></i>
@@ -101,7 +93,8 @@
             <p>Estamos contigo en cada paso del camino.</p>
         </div>
     </section>
-<section class="contact-section">
+
+    <section class="contact-section">
         <div class="contact-container">
             <div class="contact-header">
                 <h2>Hablemos de tu proyecto</h2>
@@ -128,6 +121,32 @@
             </form>
         </div>
     </section>
+    <script src="https://cdn.botpress.cloud/desk/webchat/v4.1/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/07/24/13/20260724133639-RG20KKH5.js" defer></script>
+
+<div class="ambient-card">
+    <img src="page1.png" alt="Product one">
+    <div class="ambient-label" data-price="49.99">Page one - $49.99 USD</div>
+</div>
+
+<!-- Producto 2 -->
+<div class="ambient-card">
+    <img src="page2.png" alt="Product two">
+    <div class="ambient-label" data-price="79.99">Page two - $79.99 USD</div>
+</div>
+
+<!-- Producto 3 -->
+<div class="ambient-card">
+    <img src="page3.png" alt="Product three">
+    <div class="ambient-label" data-price="120.00">Page three - $120.00</div>
+</div>
+
+<!-- Producto 4 -->
+<div class="ambient-card">
+    <img src="page4.png" alt="Product four">
+    <div class="ambient-label" data-price="35.50">Page four - $35.50 USD</div>
+</div>
+
 
     <footer class="footer">
         <div class="footer-top">
@@ -148,9 +167,10 @@
                 <a href="https://kbda.com" target="_blank">kbda.com</a>
             </div>
         </div>
-        <script src="https://cdn.botpress.cloud/desk/webchat/v4.1/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/07/24/13/20260724133639-RG20KKH5.js" defer></script>
     </footer>
-    
+
+    <!-- Botón Flotante de Compra Ya -->
+    <a href="#sliderWrapper" class="floating-buy-btn">COMPRA YA</a>
+
 </body>
 </html>

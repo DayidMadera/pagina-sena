@@ -4,10 +4,9 @@
     box-sizing: border-box;
     font-family: 'Forum', Georgia, serif;
     font-weight: 400;
-     letter-spacing: 0.05em;
-  text-transform: uppercase;
-  -webkit-user-drag: none;
-  user-drag: none; 
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    -webkit-user-drag: none;
 }
 
 body {
@@ -16,18 +15,22 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden; /* Evita que el celular baile hacia los lados */
 }
 
-#TEX{
+#TEX {
     color: #eaeaea;
-    font-weight:10000;
-    
+    font-weight: 900;
 }
+
+/* ==========================================================================
+   HEADER CORREGIDO PARA MÓVILES
+   ========================================================================== */
 .head {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 15px 20px;
     background-color: #3E4B8E;
     border-bottom: 1px solid #eaeaea;
 }
@@ -35,30 +38,30 @@ body {
 .menu-left {
     display: flex;
     align-items: center;
-    gap: 15px;
 }
 
 #trois {
     color: #FFF4EB; 
     text-decoration: none;
-    font-size: 40px;
+    font-size: 32px;
 }
 
 .logo-main {
-    margin-left: 90%;
     border-radius: 50%; 
-    width: 90px;
-    height: 90px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     display: block;
 }
 
-
+/* ==========================================================================
+   SLIDER ADAPTABLE
+   ========================================================================== */
 .slider-section-ambient {
     max-width: 1400px;
     width: 100%;
-    margin: 60px auto;
-    padding: 0 30px 50px 30px;
+    margin: 40px auto;
+    padding: 0 15px 40px 15px;
     position: relative;
     display: flex;
     align-items: center;
@@ -75,9 +78,8 @@ body {
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-
 .ambient-card {
-    min-width: calc(25% - 15px); 
+    min-width: calc(25% - 15px); /* Por defecto 4 columnas en PC */
     height: 380px; 
     position: relative;
     overflow: hidden;
@@ -91,7 +93,6 @@ body {
     display: block;
 }
 
-
 .ambient-label {
     position: absolute;
     bottom: 25px;
@@ -100,9 +101,9 @@ body {
     background-color: #ffffff;
     color: #000000;
     padding: 10px 24px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    border-radius: 30px; /* Bordes completamente redondeados */
+    border-radius: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     white-space: nowrap;
     cursor: pointer;
@@ -114,15 +115,15 @@ body {
     background-color: #f3f3f3;
 }
 
-
+/* Flechas adaptadas para no estorbar en móviles */
 .arrow-btn {
-    background-color: #1a1a1a;
+    background-color: rgba(26, 26, 26, 0.85);
     color: #ffffff;
     border: none;
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -130,23 +131,17 @@ body {
     position: absolute;
     z-index: 10;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.2s;
 }
 
-.arrow-btn:hover {
-    transform: scale(1.05);
-    background-color: #333;
-}
-
-.prev-arrow { left: 8px; }
-.next-arrow { right: 8px; }
-
+.prev-arrow { left: 5px; }
+.next-arrow { right: 5px; }
 
 .progress-bar-container {
     position: absolute;
     bottom: 0;
-    left: 30px;
-    right: 30px;
+    left: 15px;
+    right: 15px;
     height: 3px;
     background-color: #e0e0e0;
     border-radius: 2px;
@@ -154,19 +149,20 @@ body {
 
 .progress-bar-fill {
     height: 100%;
-    width: 25%; 
+    width: 0%;
     background-color: #000000; 
     border-radius: 2px;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s;
+    transition: width 0.4s ease-out;
 }
 
-
-
+/* ==========================================================================
+   BANNER LLAMADA A LA ACCIÓN
+   ========================================================================== */
 .cta-banner-container {
     max-width: 1200px;
     width: 100%;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
+    margin: 0 auto 40px auto;
+    padding: 0 15px;
 }
 
 .cta-banner-btn {
@@ -176,8 +172,8 @@ body {
     background-color: #3E4B8E; 
     color: #ffffff;
     text-decoration: none;
-    padding: 18px 30px;
-    font-size: 14px;
+    padding: 16px 24px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 1px;
     border-radius: 4px;
@@ -188,24 +184,21 @@ body {
     background-color: #A6BCC9;
 }
 
-.cta-banner-btn .arrow {
-    font-size: 18px;
-}
-
-
+/* ==========================================================================
+   SECCIÓN BENEFICIOS REESTRUCTURADA
+   ========================================================================== */
 .features-section {
     max-width: 1200px;
     width: 100%;
-    margin: 0 auto 80px auto;
+    margin: 0 auto 60px auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
 .feature-item {
-
     text-align: center;
-    padding: 20px 30px;
+    padding: 20px 15px;
     border-right: 1px solid #e0e0e0;
 }
 
@@ -214,33 +207,123 @@ body {
 }
 
 .feature-icon {
-    font-size: 28px;
+    font-size: 26px;
     color: #3E4B8E;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .feature-item h3 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #222;
 }
 
 .feature-item p {
-    font-size: 13px;
+    font-size: 12px;
     color: #777;
     line-height: 1.5;
+    text-transform: none;
 }
 
+/* ==========================================================================
+   FORMULARIO DE CONTACTO
+   ========================================================================== */
+.contact-section {
+    background-color: #ffffff;
+    padding: 60px 15px;
+    border-top: 1px solid #eaeaea;
+}
 
+.contact-container {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.contact-header h2 {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 10px;
+    letter-spacing: 0.08em;
+}
+
+.contact-header p {
+    font-size: 13px;
+    color: #666666;
+    text-transform: none; 
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #eaeaea;
+    background-color: #f7f9fc;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #333333;
+    transition: all 0.3s ease;
+    text-transform: none; 
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #3E4B8E;
+    background-color: #ffffff;
+}
+
+.form-submit-btn {
+    background-color: #3E4B8E;
+    color: #FFF4EB;
+    border: none;
+    padding: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-submit-btn:hover {
+    background-color: #2c366b;
+}
+
+/* ==========================================================================
+   FOOTER RE-DISEÑADO
+   ========================================================================== */
 .footer {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background-color: #FFF4EB;
     border-top: 1px solid #eaeaea;
-    padding: 40px 40px;
+    padding: 30px 20px;
     width: 100%;
-    margin-top: auto;
 }
 
 .footer-top {
@@ -250,7 +333,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 25px;
 }
 
 .footer-branding {
@@ -264,15 +347,12 @@ body {
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
-    opacity: 0.8;
 }
 
 .footer-text-brand p {
     font-size: 11px;
     color: #888;
-    font-weight: 500;
     line-height: 1.4;
-    letter-spacing: 0.5px;
 }
 
 .footer-socials {
@@ -284,151 +364,81 @@ body {
     color: #666;
     font-size: 18px;
     text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.footer-socials a:hover {
-    color: #3E4B8E;
 }
 
 .footer-domain a {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 15px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
     color: #333;
     text-decoration: none;
-    font-weight: 500;
 }
 
-
-@media (max-width: 1200px) {
-    .ambient-card { min-width: calc(33.333% - 14px); } /* 3 fotos */
-}
-
-@media (max-width: 900px) {
-    .ambient-card { min-width: calc(50% - 10px); height: 320px; } /* 2 fotos */
-}
-
-@media (max-width: 768px) {
-    .features-section { grid-template-columns: 1fr 1fr; gap: 30px; }
-    .feature-item { border-right: none; }
-    .footer-top { flex-direction: column; text-align: center; }
-    .footer-branding { flex-direction: column; gap: 10px; }
-}
-
-@media (max-width: 600px) {
-    .ambient-card { min-width: 100%; height: 280px; } /* 1 foto */
-}
-
-@media (max-width: 480px) {
-    .features-section { grid-template-columns: 1fr; }
-}
 /* ==========================================================================
-   SECCIÓN DEL FORMULARIO DE CONTACTO
+   BOTÓN FLOTANTE COMPRA YA
    ========================================================================== */
-.contact-section {
-    background-color: #ffffff;
-    padding: 80px 20px;
-    border-top: 1px solid #eaeaea;
-}
-
-.contact-container {
-    max-width: 650px;
-    margin: 0 auto;
-}
-
-.contact-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.contact-header h2 {
-    font-size: 28px;
-    color: #333333;
-    margin-bottom: 12px;
-    letter-spacing: 0.08em;
-}
-
-.contact-header p {
-    font-size: 14px;
-    color: #666666;
-    text-transform: none; /* Evita que el texto heredado se fuerce a mayúsculas */
-}
-
-/* Estructura del Formulario */
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form-group label {
-    font-size: 12px;
-    font-weight: 500;
-    color: #333333;
-    letter-spacing: 0.05em;
-}
-
-/* Inputs y Textarea */
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-    width: 100%;
-    padding: 16px;
-    border: 1px solid #eaeaea;
-    background-color: #f7f9fc;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 14px;
-    color: #333333;
-    transition: all 0.3s ease;
-    text-transform: none; /* Permite escribir normalmente en minúsculas */
-}
-
-/* Modificar placeholder */
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #999999;
-    text-transform: none;
-}
-
-/* Enfoque de Inputs (Focus) */
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: #3E4B8E;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(62, 75, 142, 0.05);
-}
-
-/* Botón de Envío */
-.form-submit-btn {
+.floating-buy-btn {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
     background-color: #3E4B8E;
     color: #FFF4EB;
-    border: none;
-    padding: 18px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
+    text-decoration: none;
+    padding: 14px 28px;
+    font-size: 13px;
+    font-weight: 600;
     letter-spacing: 0.1em;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
     transition: all 0.3s ease;
-    margin-top: 10px;
 }
 
-.form-submit-btn:hover {
-    background-color: #2c366b;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(62, 75, 142, 0.2);
+.floating-buy-btn:hover {
+    background-color: #A6BCC9;
+    color: #333333;
+    transform: translateY(-3px);
 }
 
-.form-submit-btn:active {
-    transform: translateY(0);
+/* ==========================================================================
+   MEDIA QUERIES (ADAPTACIÓN CELULARES Y TABLETS)
+   ========================================================================== */
+
+/* Tablets / Pantallas Medianas */
+@media (max-width: 1024px) {
+    .ambient-card { min-width: calc(33.333% - 14px); } /* 3 fotos */
+    .features-section { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .feature-item { border-right: none; }
+    .feature-item:nth-child(odd) { border-right: 1px solid #e0e0e0; }
 }
 
+/* Celulares Grandes */
+@media (max-width: 768px) {
+    .head { padding: 12px 15px; }
+    #TEX { font-size: 24px; }
+    .logo-main { width: 50px; height: 50px; }
+    
+    .ambient-card { min-width: calc(50% - 10px); height: 320px; } /* 2 fotos */
+    
+    .footer-top { flex-direction: column; text-align: center; gap: 20px; }
+    .footer-branding { flex-direction: column; gap: 8px; }
+}
+
+/* Celulares Estándar y Pequeños */
+@media (max-width: 550px) {
+    .ambient-card { min-width: 100%; height: 340px; } /* 1 foto limpia por pantalla */
+    .arrow-btn { display: none; } /* Ocultamos las flechas en celular; se usa el arrastre táctil (Swipe) */
+    
+    .features-section { grid-template-columns: 1fr; gap: 25px; } /* Beneficios en lista vertical */
+    .feature-item { border-right: none !important; padding: 10px 0; }
+    
+    .floating-buy-btn {
+        bottom: 20px;
+        left: 20px;
+        padding: 12px 22px;
+        font-size: 11px;
+    }
+    
+    .contact-header h2 { font-size: 20px; }
+    .cta-banner-btn { font-size: 11px; padding: 14px 18px; }
+}
+ 
