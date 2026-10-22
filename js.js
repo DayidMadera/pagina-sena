@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================================================
+    /* 
        KBDA SHOWCASE — SLIDER
-       ========================================================= */
+ */
 
     const showcaseWindow =
         document.getElementById("showcaseWindow");
@@ -190,9 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
-           BOTÓN SIGUIENTE
-           ===================================================== */
+        /* 
+           BTN SIGUIENTE
+           =*/
 
         if (showcaseNext) {
 
@@ -209,9 +209,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
-           BOTÓN ANTERIOR
-           ===================================================== */
+        /* 
+           BTN ANTERIOR
+         */
 
         if (showcasePrev) {
 
@@ -228,9 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
-           OBTENER POSICIÓN
-           ===================================================== */
 
         function getX(event) {
 
@@ -254,9 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
-           INICIAR ARRASTRE
-           ===================================================== */
 
         function startDrag(event) {
 
@@ -290,9 +284,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
+        /* 
            MOVER
-           ===================================================== */
+          */
 
         function moveDrag(event) {
 
@@ -351,9 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
-           ANIMACIÓN DEL ARRASTRE
-           ===================================================== */
+ 
 
         function animateDrag() {
 
@@ -375,9 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
-           FINALIZAR ARRASTRE
-           ===================================================== */
+       
 
         function endDrag() {
 
@@ -431,9 +421,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
+        /*
            MOUSE
-           ===================================================== */
+        */
 
         showcaseWindow.addEventListener(
             "mousedown",
@@ -455,10 +445,6 @@ document.addEventListener("DOMContentLoaded", () => {
             endDrag
         );
 
-
-        /* =====================================================
-           TOUCH
-           ===================================================== */
 
         showcaseWindow.addEventListener(
             "touchstart",
@@ -487,9 +473,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* =====================================================
+        /* 
            EVITAR ARRASTRE NATIVO DE IMÁGENES
-           ===================================================== */
+          */
 
         cards.forEach(
             card => {
@@ -513,9 +499,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* =====================================================
+        /*
            TECLADO
-           ===================================================== */
+         */
 
         document.addEventListener(
             "keydown",
@@ -556,9 +542,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* =====================================================
+        /*
            RESPONSIVE
-           ===================================================== */
+         */
 
         let resizeTimer;
 
@@ -585,18 +571,18 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* =====================================================
+        /*
            INICIO
-           ===================================================== */
+         */
 
         updateShowcase(false);
     }
 
 
 
-    /* =========================================================
-       MENÚ
-       ========================================================= */
+    /*
+       MENU
+   */
 
     const menuToggle =
         document.getElementById(
@@ -732,9 +718,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    /* =========================================================
+    /*
        FORMULARIO
-       ========================================================= */
+    */
 
     const contactForm =
         document.querySelector(
@@ -743,41 +729,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     if (contactForm) {
+        const projectFile = document.getElementById("archivoProyecto");
+        const fileNameLabel = document.getElementById("selectedFileName");
+        const formSuccess = document.getElementById("formSuccess");
 
-        contactForm.addEventListener(
-            "submit",
-            event => {
+        if (projectFile && fileNameLabel) {
+            projectFile.addEventListener("change", () => {
+                const file = projectFile.files && projectFile.files[0];
+                if (!file) {
+                    fileNameLabel.textContent = "Ningún archivo seleccionado";
+                    fileNameLabel.classList.remove("file-selected", "file-error");
+                    return;
+                }
+                const validExtension = /\.(html?|zip)$/i.test(file.name);
+                const validSize = file.size <= 10 * 1024 * 1024;
+                if (!validExtension || !validSize) {
+                    projectFile.value = "";
+                    fileNameLabel.textContent = !validExtension
+                        ? "Formato no compatible. Sube un archivo HTML o ZIP."
+                        : "El archivo supera el límite de 10 MB.";
+                    fileNameLabel.classList.add("file-error");
+                    fileNameLabel.classList.remove("file-selected");
+                    return;
+                }
+                fileNameLabel.textContent = `${file.name} · ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+                fileNameLabel.classList.add("file-selected");
+                fileNameLabel.classList.remove("file-error");
+            });
+        }
 
-                event.preventDefault();
+        contactForm.addEventListener("submit", event => {
+            event.preventDefault();
+            const nameInput = document.getElementById("nombre");
+            const name = nameInput ? nameInput.value.trim() : "cliente";
+            const file = projectFile && projectFile.files ? projectFile.files[0] : null;
 
-
-                const nameInput =
-                    document.getElementById(
-                        "nombre"
-                    );
-
-
-                const name =
-                    nameInput
-                        ? nameInput.value.trim()
-                        : "cliente";
-
-
-                alert(
-                    `¡Gracias ${name}! Tu mensaje ha sido enviado correctamente.`
-                );
-
-
-                contactForm.reset();
+            if (formSuccess) {
+                formSuccess.textContent = `Gracias, ${name}. El formulario está validado${file ? ` y tu archivo “${file.name}” está adjunto en esta sesión` : ""}. Para recibir realmente la solicitud y el archivo, KBDA debe conectar este formulario a un servicio de envío.`;
+                formSuccess.classList.add("is-visible");
+            } else {
+                alert(`Gracias, ${name}. El formulario está validado, pero todavía no está conectado a un servicio de envío.`);
             }
-        );
+        });
     }
 
 
 
-    /* =========================================================
+    /*
        PLANTILLAS
-       ========================================================= */
+    */
 
     const templateButtons =
         document.querySelectorAll(
@@ -785,36 +785,121 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    templateButtons.forEach(
-        button => {
+    const templateInfo = {
+        "Plantilla Editorial": { layout: "editorial", title: "Una historia visual que conecta.", eyebrow: "EDICIÓN N.º 01 / HISTORIAS DE MARCA", description: "Una experiencia de revista: titulares serif, jerarquía tipográfica, una historia principal y bloques de contenido cuidadosamente editados.", sections: ["Portada e historia", "Artículo destacado", "Notas y contacto"], cta: "LEER LA HISTORIA" },
+        "Plantilla Minimal": { layout: "minimal", title: "Menos ruido. Más impacto.", eyebrow: "EST. 2026 / DISEÑO ESENCIAL", description: "Mucho espacio en blanco, pocos elementos, una sola idea protagonista y navegación discreta. Cada detalle tiene una función.", sections: ["Idea principal", "Tres principios", "Contacto simple"], cta: "DESCUBRIR" },
+        "Plantilla Creative": { layout: "creative", title: "Ideas fuera de lo común.", eyebrow: "LABORATORIO CREATIVO / 001", description: "Composición experimental con bloques asimétricos, tipografía de gran escala, acentos inesperados y piezas visuales superpuestas.", sections: ["Manifiesto ↗", "Experimentos visuales", "Ideas en proceso"], cta: "ENTRAR AL LABORATORIO" },
+        "Plantilla Business": { layout: "business", title: "Construyamos lo que sigue.", eyebrow: "CONSULTORÍA / SOLUCIONES PARA EMPRESAS", description: "Estructura corporativa pulcra con propuesta de valor clara, servicios organizados, indicadores de confianza y un siguiente paso concreto.", sections: ["Servicios y capacidades", "Resultados e indicadores", "Solicitar propuesta"], cta: "AGENDAR UNA CONSULTA" },
+        "Plantilla Portfolio": { layout: "portfolio", title: "Trabajo que habla por sí mismo.", eyebrow: "ARCHIVO DE OBRA / VOL. 01", description: "Un portafolio artístico con ritmo de libro: índice, fichas de obra, numeración, notas de proceso y una selección curada de proyectos.", sections: ["Índice de proyectos", "Estudios de caso", "Cuaderno de proceso"], cta: "ABRIR EL ARCHIVO" },
+        "Plantilla Fashion": { layout: "fashion", title: "Forma, detalle y personalidad.", eyebrow: "MAISON / COLECCIÓN N.º 06", description: "Dirección de arte de moda con portada editorial, tipografía de contraste, detalles de colección y una composición elegante tipo revista.", sections: ["Portada de colección", "Detalles y materiales", "Campaña editorial"], cta: "VER LA COLECCIÓN" }
+    };
+    const paletteChoices = [
+        { id: "original", name: "Crema KBDA", color: "#f8f7f3" },
+        { id: "blue", name: "Azul suave", color: "#e5ecf8" },
+        { id: "wine", name: "Vino", color: "#542c3e" },
+        { id: "forest", name: "Verde bosque", color: "#e8ede4" },
+        { id: "dark", name: "Noche", color: "#20212b" },
+        { id: "terracotta", name: "Terracota", color: "#f4e4da" }
+    ];
+    let activeTemplateButton = null;
+    let activeTemplatePalette = "original";
 
-            button.addEventListener(
-                "click",
-                () => {
+    const templateModal = document.createElement("div");
+    templateModal.className = "template-modal";
+    templateModal.id = "templatePreviewModal";
+    templateModal.setAttribute("aria-hidden", "true");
+    templateModal.innerHTML = `
+      <section class="template-modal-panel" role="dialog" aria-modal="true" aria-labelledby="templateModalTitle">
+        <header class="template-modal-head">
+          <div><small id="templateModalEyebrow">PLANTILLA / VISTA PREVIA</small><h2 id="templateModalTitle">Editorial</h2></div>
+          <button class="template-modal-close" type="button" aria-label="Cerrar vista previa">×</button>
+        </header>
+        <div class="template-modal-tools"><label>PRUEBA LOS COLORES</label><div class="template-swatches" style="display:flex;gap:10px;flex-wrap:wrap"></div><span class="template-palette-name" style="font-size:11px;color:var(--text-soft)">Crema KBDA</span></div>
+        <div class="template-preview-site" data-palette="original">
+          <nav class="template-site-nav"><strong class="template-site-brand">YOUR BRAND</strong><span>ESTUDIO / DIGITAL</span><span>MENU ↗</span></nav>
+          <div class="template-site-hero"><small class="template-site-eyebrow"></small><h3 class="template-site-title"></h3><p class="template-site-description"></p><span class="template-site-cta"></span></div>
+          <div class="template-site-sections"></div>
+        </div>
+        <footer class="template-modal-foot"><p>Vista conceptual de la estructura que incluye esta plantilla. Puedes cambiar la paleta para explorar otras identidades.</p><button type="button" class="template-select-confirm">ELEGIR ESTA PLANTILLA ↗</button></footer>
+      </section>`;
+    document.body.appendChild(templateModal);
 
-                    const template =
-                        button.dataset.template ||
-                        "esta plantilla";
-
-
-                    const price =
-                        button.dataset.price ||
-                        "";
-
-
-                    alert(
-                        `Has elegido ${template} ${price}`
-                    );
-                }
-            );
+    const modalSite = templateModal.querySelector(".template-preview-site");
+    const modalSwatches = templateModal.querySelector(".template-swatches");
+    const closeTemplateModal = () => {
+        templateModal.classList.remove("is-open");
+        templateModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        if (activeTemplateButton) activeTemplateButton.focus();
+    };
+    paletteChoices.forEach((palette) => {
+        const swatch = document.createElement("button");
+        swatch.type = "button";
+        swatch.className = "template-swatch";
+        swatch.style.background = palette.color;
+        swatch.setAttribute("aria-label", palette.name);
+        swatch.setAttribute("aria-pressed", "false");
+        swatch.addEventListener("click", () => {
+            activeTemplatePalette = palette.id;
+            modalSite.dataset.palette = palette.id;
+            templateModal.querySelector(".template-palette-name").textContent = palette.name;
+            modalSwatches.querySelectorAll("button").forEach((item) => item.setAttribute("aria-pressed", String(item === swatch)));
+        });
+        modalSwatches.appendChild(swatch);
+    });
+    function openTemplatePreview(button) {
+        activeTemplateButton = button;
+        activeTemplatePalette = "original";
+        const name = button.dataset.template || "Plantilla KBDA";
+        const info = templateInfo[name] || templateInfo["Plantilla Editorial"];
+        const title = name.replace("Plantilla ", "");
+        templateModal.querySelector("#templateModalTitle").textContent = title;
+        templateModal.querySelector("#templateModalEyebrow").textContent = `${name.toUpperCase()} / VISTA PREVIA`;
+        templateModal.querySelector(".template-site-brand").textContent = title.toUpperCase() + "®";
+        templateModal.querySelector(".template-site-eyebrow").textContent = info.eyebrow;
+        templateModal.querySelector(".template-site-title").innerHTML = info.title.replace(/(visual|impacto|sigue|mismo|personalidad)/i, "<em>$1</em>");
+        templateModal.querySelector(".template-site-description").textContent = info.description;
+        templateModal.querySelector(".template-site-cta").textContent = info.cta + "  ↗";
+        const sections = templateModal.querySelector(".template-site-sections");
+        sections.innerHTML = "";
+        info.sections.forEach((section, index) => {
+            const item = document.createElement("div");
+            item.className = "template-site-section";
+            item.innerHTML = `<small>0${index + 1} / SECCIÓN</small><strong></strong>`;
+            item.querySelector("strong").textContent = section;
+            sections.appendChild(item);
+        });
+        modalSite.dataset.palette = "original";
+        modalSite.dataset.layout = info.layout || "editorial";
+        modalSite.className = `template-preview-site layout-${info.layout || "editorial"}`;
+        templateModal.querySelector(".template-palette-name").textContent = "Crema KBDA";
+        modalSwatches.querySelectorAll("button").forEach((item, index) => item.setAttribute("aria-pressed", String(index === 0)));
+        templateModal.querySelector(".template-select-confirm").textContent = `ELEGIR ${title.toUpperCase()} · ${button.dataset.price || ""} ↗`;
+        templateModal.classList.add("is-open");
+        templateModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        templateModal.querySelector(".template-modal-close").focus();
+    }
+    templateButtons.forEach(button => button.addEventListener("click", () => openTemplatePreview(button)));
+    templateModal.querySelector(".template-modal-close").addEventListener("click", closeTemplateModal);
+    templateModal.addEventListener("click", event => { if (event.target === templateModal) closeTemplateModal(); });
+    templateModal.querySelector(".template-select-confirm").addEventListener("click", () => {
+        if (activeTemplateButton) {
+            const template = activeTemplateButton.dataset.template || "esta plantilla";
+            const price = activeTemplateButton.dataset.price || "";
+            closeTemplateModal();
+            alert(`Has elegido ${template} ${price}. La selección está lista para continuar con KBDA.`);
         }
-    );
+    });
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && templateModal.classList.contains("is-open")) closeTemplateModal();
+    });
 
 
 
-    /* =========================================================
+    /*
        ANIMACIONES
-       ========================================================= */
+    */
 
     const revealElements =
         document.querySelectorAll(
@@ -870,9 +955,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* =========================================================
-   KBDA STUDIO — EXPERIENCIA PILOTO
-   ========================================================= */
+/*
+   EXPERIENCIA PILOTO!!!!!!!!!!!!!!!!!!!!!!!!!!!
+*/
 
 (() => {
 
@@ -897,9 +982,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    /* ---------------------------------------------------------
-       VERIFICAR QUE STUDIO EXISTA
-       --------------------------------------------------------- */
 
     if (
         !pilot ||
@@ -910,9 +992,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------------------------------------------------------
+    /*
        ELEMENTOS DEL EDITOR
-       --------------------------------------------------------- */
+       */
 
     const page =
         document.getElementById(
@@ -975,9 +1057,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    /* ---------------------------------------------------------
+    /* 
        GUARDAR ESTADO INICIAL
-       --------------------------------------------------------- */
+  */
 
     const initialState = {
 
@@ -1007,27 +1089,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let toastTimer;
 
 
-    /* ---------------------------------------------------------
+    /* 
        PALETAS KBDA
-       --------------------------------------------------------- */
+      */
 
-    const palettes = [
-        "",
-        "color-blue",
-        "color-vino"
+    const palettes = ["", "color-blue", "color-vino", "color-forest", "color-dark", "color-terracotta", "color-lilac"];
+    const paletteNames = ["CREMA KBDA", "AZUL SUAVE", "VINO KBDA", "VERDE BOSQUE", "NOCHE", "TERRACOTA", "LILA SUAVE"];
+    const sectionPresets = [
+        { label: "02 / SERVICIOS", title: "Soluciones<br>hechas para ti.", toast: "Sección de servicios agregada" },
+        { label: "03 / PROYECTOS", title: "Ideas que se<br>convierten en impacto.", toast: "Sección de proyectos agregada" },
+        { label: "04 / CONTACTO", title: "Hagamos algo<br>extraordinario.", toast: "Sección de contacto agregada" }
     ];
+    let sectionIndex = 0;
+    let layoutIndex = 0;
 
 
-    const paletteNames = [
-        "CREMA KBDA",
-        "AZUL SUAVE",
-        "VINO KBDA"
-    ];
-
-
-    /* ---------------------------------------------------------
+    /* 
        TOAST
-       --------------------------------------------------------- */
+        */
 
     function showToast(message) {
 
@@ -1062,9 +1141,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------------------------------------------------------
+    /* 
        ABRIR STUDIO
-       --------------------------------------------------------- */
+        */
 
     function openPilot() {
 
@@ -1093,9 +1172,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------------------------------------------------------
+    /* 
        CERRAR STUDIO
-       --------------------------------------------------------- */
+        */
 
     function closePilot() {
 
@@ -1114,9 +1193,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------------------------------------------------------
+    /* 
        SELECCIONAR HERRAMIENTA
-       --------------------------------------------------------- */
+        */
 
     function setTool(tool) {
 
@@ -1198,9 +1277,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------------------------------------------------------
+    /* 
        ACTIVAR EDICIÓN DE TEXTO
-       --------------------------------------------------------- */
+        */
 
     function enableTextEditing() {
 
@@ -1254,9 +1333,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------------------------------------------------------
+    /* 
        DESACTIVAR EDICIÓN
-       --------------------------------------------------------- */
+        */
 
     function disableTextEditing() {
 
@@ -1295,16 +1374,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------------------------------------------------------
+    /* 
        EJECUTAR HERRAMIENTA
-       --------------------------------------------------------- */
+        */
 
     function runTool() {
 
 
-        /* =====================================================
+        /*
            AGREGAR SECCIÓN
-           ===================================================== */
+         */
 
         if (
             currentTool === "add"
@@ -1319,15 +1398,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 addedSection.hidden;
 
 
-            addedSection.hidden =
-                !willShow;
-
-
-            showToast(
-                willShow
-                    ? "Sección agregada a la propuesta"
-                    : "Sección retirada"
-            );
+            if (willShow) {
+                const preset = sectionPresets[sectionIndex % sectionPresets.length];
+                const label = addedSection.querySelector("span");
+                const heading = addedSection.querySelector("strong");
+                if (label) label.textContent = preset.label;
+                if (heading) heading.innerHTML = preset.title;
+                sectionIndex++;
+            }
+            addedSection.hidden = !willShow;
+            showToast(willShow ? sectionPresets[(sectionIndex - 1) % sectionPresets.length].toast : "Sección retirada");
 
 
             if (action) {
@@ -1343,9 +1423,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
+        /*
            EDITAR TEXTO
-           ===================================================== */
+         */
 
         if (
             currentTool === "text"
@@ -1370,9 +1450,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
+        /*
            CAMBIAR ESTILO
-           ===================================================== */
+         */
 
         if (
             currentTool === "layout"
@@ -1383,40 +1463,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            page.classList.toggle(
-                "layout-minimal"
-            );
-
-
-            const minimal =
-                page.classList.contains(
-                    "layout-minimal"
-                );
+            const layouts = ["layout-minimal", "layout-bold"];
+            page.classList.remove("layout-minimal", "layout-bold");
+            layoutIndex = (layoutIndex + 1) % 3;
+            if (layoutIndex > 0) page.classList.add(layouts[layoutIndex - 1]);
+            const minimal = layoutIndex === 1;
+            const bold = layoutIndex === 2;
 
 
             if (mode) {
 
-                mode.textContent =
-                    minimal
-                        ? "LANDING / MINIMAL"
-                        : "LANDING / EDITORIAL";
+                mode.textContent = minimal ? "LANDING / MINIMAL" : bold ? "LANDING / IMPACTO" : "LANDING / EDITORIAL";
             }
 
 
-            showToast(
-                minimal
-                    ? "Composición minimal activada"
-                    : "Composición editorial activada"
-            );
+            showToast(minimal ? "Composición minimal activada" : bold ? "Composición de impacto activada" : "Composición editorial activada");
 
 
             return;
         }
 
 
-        /* =====================================================
+        /*
            CAMBIAR COLOR
-           ===================================================== */
+         */
 
         if (
             currentTool === "color"
@@ -1427,10 +1497,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            page.classList.remove(
-                "color-blue",
-                "color-vino"
-            );
+            page.classList.remove("color-blue", "color-vino", "color-forest", "color-dark", "color-terracotta", "color-lilac");
 
 
             colorIndex =
@@ -1459,31 +1526,36 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* =====================================================
+        /*
            EXPORTAR
-           ===================================================== */
+         */
 
-        if (
-            currentTool === "export"
-        ) {
-
-            showToast(
-                "✓ Propuesta preparada para presentar al cliente"
-            );
-
-
-            if (mode) {
-
-                mode.textContent =
-                    "PROPUESTA / LISTA";
+        if (currentTool === "export") {
+            const exportPage = page ? page.cloneNode(true) : null;
+            if (exportPage) {
+                exportPage.querySelectorAll("[contenteditable]").forEach(el => el.removeAttribute("contenteditable"));
+                const exportHtml = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Propuesta KBDA Studio</title><style>body{margin:0;font-family:Arial,sans-serif} .pilot-page{position:relative;min-height:80vh;padding:5vw;overflow:hidden}.pilot-page-header{display:flex;justify-content:space-between;gap:20px}.pilot-page-header nav{display:flex;gap:18px}.pilot-hero{max-width:760px;padding:10vh 0}.pilot-hero h1{font-size:clamp(42px,8vw,100px);line-height:.95}.pilot-hero h1 em{color:#5065a7;font-style:normal}.pilot-hero p{max-width:520px;line-height:1.8}.pilot-actions{display:flex;gap:20px;align-items:center}.pilot-added-section{padding:30px;border-top:1px solid currentColor}.layout-minimal{text-align:center}.layout-bold .pilot-hero h1{font-weight:700;letter-spacing:-.06em}.color-blue{background:#dfe6f3;color:#27325f}.color-vino{background:#5b3445;color:#f7f5f1}.color-vino em{color:#d7c3c9}.color-forest{background:#e8ede4;color:#263f35}.color-dark{background:#20212b;color:#f5f0e8}.color-dark em{color:#a6b5dd}.color-terracotta{background:#f4e4da;color:#603d32}.color-terracotta em{color:#b96e51}.color-lilac{background:#eee8f8;color:#40355e}.color-lilac em{color:#8b72b5}</style></head><body>${exportPage.outerHTML}</body></html>`;
+                const blob = new Blob([exportHtml], { type: "text/html;charset=utf-8" });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "propuesta-kbda-studio.html";
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(url);
+                showToast("Propuesta HTML exportada");
+            } else {
+                showToast("No se encontró la propuesta para exportar");
             }
+            if (mode) mode.textContent = "PROPUESTA / EXPORTADA";
         }
     }
 
 
-    /* ---------------------------------------------------------
+    /* 
        REINICIAR EXPERIENCIA
-       --------------------------------------------------------- */
+        */
 
     function resetPilot() {
 
@@ -1519,15 +1591,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
             page.classList.remove(
                 "layout-minimal",
+                "layout-bold",
                 "color-blue",
                 "color-vino",
+                "color-forest",
+                "color-dark",
+                "color-terracotta",
+                "color-lilac",
                 "edit-mode"
             );
         }
 
 
-        colorIndex =
-            0;
+        colorIndex = 0;
+        layoutIndex = 0;
+        sectionIndex = 0;
 
 
         disableTextEditing();
@@ -1548,9 +1626,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================================
+    /*====
        EVENTOS DE KBDA STUDIO
-       ========================================================= */
+    */
 
 
     /* ABRIR DESDE EL BOTÓN */
@@ -1718,9 +1796,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================================
+    /*====
        ESTADO INICIAL
-       ========================================================= */
+    */
 
     if (pilot) {
 

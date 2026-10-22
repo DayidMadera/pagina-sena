@@ -45,7 +45,7 @@
     <header class="site-header" id="inicio">
 
 
-        <!-- MENu -->
+        
 
         <button
             class="menu-toggle"
@@ -331,7 +331,7 @@
 
 
 
-            <!-- CARRUSEL -->
+        
 
             <div class="showcase-slider">
 
@@ -534,11 +534,7 @@
 
 
 
-        <!-- =================================================
-             PLANTILLAS
-             AHORA SÍ:
-             SON DISEÑOS CREADOS CON HTML + CSS
-             ================================================= -->
+
 
         <section
             class="templates-section"
@@ -587,9 +583,7 @@
             <div class="template-grid">
 
 
-                <!-- =========================================
-                     PLANTILLA 01
-                     ========================================= -->
+             
 
                 <article class="template-card">
 
@@ -784,9 +778,7 @@
 
 
 
-                <!-- =========================================
-                     PLANTILLA 03
-                     ========================================= -->
+          
 
                 <article class="template-card">
 
@@ -1205,10 +1197,6 @@
         </section>
 
 
-
-        <!-- =================================================
-             SERVICIOS
-             ================================================= -->
 
         <section
             class="services-section"
@@ -1849,6 +1837,24 @@
 
 
 
+                <div class="form-group form-file-group">
+
+                    <label for="archivoProyecto">
+                        ARCHIVO DE KBDA STUDIO
+                    </label>
+
+                    <p class="form-file-help">Adjunta el HTML que descargaste desde KBDA Studio. También puedes subir un ZIP con tu propuesta.</p>
+                    <label class="file-upload-control" for="archivoProyecto">
+                        <span class="file-upload-icon">↥</span>
+                        <span class="file-upload-copy"><strong>Seleccionar archivo</strong><small>HTML o ZIP · máximo 10 MB</small></span>
+                        <span class="file-upload-action">EXPLORAR</span>
+                    </label>
+                    <input type="file" id="archivoProyecto" name="archivoProyecto" accept=".html,.htm,.zip,text/html,application/zip,application/x-zip-compressed" class="file-input-hidden">
+                    <p class="selected-file-name" id="selectedFileName" aria-live="polite">Ningún archivo seleccionado</p>
+
+                </div>
+
+
                 <div class="form-group">
 
                     <label for="mensaje">
@@ -1908,9 +1914,7 @@
 
 
 
-    <!-- =====================================================
-         FOOTER
-         ===================================================== -->
+
 
     <footer class="site-footer">
 
@@ -1921,15 +1925,18 @@
             <div class="footer-brand">
 
 
-                <div class="footer-logo">
+                <a
+            href="#inicio"
+            class="brand-logo"
+            aria-label="KBDA inicio"
+        >
 
-                    <img
-                        src="logo.png"
-                        alt="Logo KBDA"
-                    >
+            <img
+                src="logo.png"
+                alt="Logo KBDA"
+            >
 
-                </div>
-
+        </a>
 
                 <div>
 
@@ -1998,9 +2005,7 @@
 
 
 
-    <!-- =====================================================
-         MODAL DE PLANTILLA
-         ===================================================== -->
+
 
     <div
         class="template-modal"
@@ -2066,18 +2071,6 @@
 
     </div>
 
-
-
-    <!-- =====================================================
-         BOTÓN FLOTANTE
-         ===================================================== -->
-
-    <a
-        href="#plantillas"
-        class="floating-buy-btn"
-    >
-        COMPRA YA
-    </a>
 
 
 </body>
