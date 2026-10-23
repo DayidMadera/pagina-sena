@@ -3330,15 +3330,46 @@ body { font-size: 15px; }
     }
 }
 
-/* =========================================================
-   AJUSTE DE IMAGEN COMPLETA PARA CELULARES
-   ========================================================= */
-
-@media (max-width: 768px) {
+/* 3. TABLETS VERTICALES Y PANTALLAS PLEGABLES (601px a 768px) */
+@media (max-width: 768px) and (min-width: 601px) {
     .hero {
+        background-image: url('kdba\ celuco.jpg'); 
         background-size: cover;
-        /* Ajusta el enfoque al 90% horizontal para mostrar la pared completa */
-        background-position: 90% center;
-        padding: 120px 20px 60px;
+        background-position: center center;
+        padding: 130px 24px 70px;
+        min-height: 85vh;
+    }
+}
+
+/* 4. CELULARES GRANDES / PRO MAX / PHABLETS (415px a 600px) */
+@media (max-width: 600px) and (min-width: 415px) {
+    .hero {
+        background-image: url('kdba\ celuco.jpg');
+        background-size: cover;
+        background-position: center center;
+        padding: 125px 20px 60px;
+        min-height: 82vh;
+    }
+}
+
+/* 5. CELULARES ESTÁNDAR Y DE PANTALLA ALTA (361px a 414px) */
+@media (max-width: 414px) and (min-width: 361px) {
+    .hero {
+        background-image: url('kdba\ celuco.jpg');
+        background-size: cover;
+        background-position: center center;
+        padding: 120px 18px 55px;
+        min-height: 80vh;
+    }
+}
+
+/* 6. CELULARES COMPACTOS Y PEQUEÑOS (Hasta 360px de ancho) */
+@media (max-width: 360px) {
+    .hero {
+        background-image: url('kdba\ celuco.jpg');
+        background-size: cover;
+        background-position: center center;
+        padding: 110px 15px 45px;
+        min-height: 75vh;
     }
 }
