@@ -99,34 +99,23 @@ img {
 
 /* HEADER*/
 
+/* HEADER TRANSLÚCIDO SOBRE EL HERO */
 .site-header {
-
-    position: sticky;
-
+    position: absolute; /* Cambiado de sticky a absolute para que flote sobre la imagen */
     top: 0;
-
+    left: 0;
     z-index: 1000;
-
     height: 102px;
-
     padding: 0 28px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    background: rgba(247,245,241,.94);
-
-    border-bottom: 1px solid var(--line);
-
-    backdrop-filter: blur(14px);
-
+    background: rgba(247, 245, 241, 0.25); /* Fondo translúcido sutil */
+    border-bottom: 1px solid rgba(217, 216, 212, 0.3); /* Línea más suave y transparente */
+    backdrop-filter: blur(12px); /* Efecto cristal esmerilado */
+    -webkit-backdrop-filter: blur(12px);
     width: 100%;
-
 }
-
 
 .brand-name {
 
@@ -455,489 +444,237 @@ img {
 }
 
 
-/* HERO*/
+/* =========================================================
+   HERO — IMAGEN GRANDE Y LIMPIA (SIN CAJA LATERAL)
+   ========================================================= */
 
 .hero {
-
-    min-height: 650px;
-
-    max-width: 1380px;
-
+    min-height: 92vh; /* Ocupa casi toda la altura de la pantalla para verse más grande */
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
-
-    padding: 90px 70px;
-
-    display: grid;
-
-    grid-template-columns: 1fr 420px;
-
+    padding: 160px 8vw 100px; /* Espaciado generoso para que respire el contenido */
+    display: flex;
     align-items: center;
-
-    gap: 70px;
-
+    justify-content: flex-start; /* Alinea el contenido a la izquierda */
     border-bottom: 1px solid var(--line);
-
+    
+    /* IMAGEN DE FONDO */
+    background-image: url('KDBA\ fondo.jpeg'); /* Reemplaza con el nombre de tu archivo */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
+/* Capa translúcida muy sutil opcional para mejorar legibilidad (puedes quitarla si prefieres la imagen 100% limpia) */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(247, 245, 241, 0.12); /* Leve toque para fundir con el diseño */
+    pointer-events: none;
+}
 
+/* Bloque de texto principal (Izquierda) */
 .hero-copy {
-
-    max-width: 720px;
-
+    max-width: 750px;
+    position: relative;
+    z-index: 2;
 }
-
 
 .eyebrow {
-
     display: block;
-
     margin-bottom: 20px;
-
-    font-size: 9px;
-
+    font-family: var(--sans);
+    font-size: 10px;
     letter-spacing: 3px;
-
     color: var(--blue);
-
 }
-
 
 .hero h1 {
-
     font-family: var(--serif);
-
-    font-size: clamp(38px, 6vw, 86px);
-
-    line-height: .94;
-
+    font-size: clamp(40px, 6.5vw, 92px);
+    line-height: .92;
     font-weight: 400;
-
     color: var(--text);
-
 }
-
 
 .hero h1 em {
-
     color: var(--blue);
-
     font-style: normal;
-
 }
-
 
 .hero-copy > p {
-
-    max-width: 520px;
-
+    max-width: 540px;
     margin-top: 30px;
-
-    font-size: 15px;
-
+    font-family: var(--sans);
+    font-size: 16px;
     line-height: 1.8;
-
     color: var(--text-soft);
-
 }
-
 
 .hero-actions {
-
-    margin-top: 35px;
-
+    margin-top: 40px;
     display: flex;
-
     align-items: center;
-
     gap: 25px;
-
 }
-
 
 .hero-button {
-
-    min-height: 50px;
-
-    padding: 0 20px;
-
+    min-height: 52px;
+    padding: 0 26px;
     display: inline-flex;
-
     align-items: center;
-
-    gap: 25px;
-
+    gap: 20px;
     background: var(--blue);
-
-    color: white;
-
+    color: #FFFFFF;
+    font-family: var(--sans);
     font-size: 9px;
-
     letter-spacing: 2px;
-
     transition: .3s ease;
-
 }
-
 
 .hero-button span {
-
-    font-size: 17px;
-
+    font-size: 16px;
 }
-
 
 .hero-button:hover {
-
     background: var(--blue-dark);
-
     transform: translateY(-3px);
-
 }
 
-
-.hero-secondary {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    color: var(--blue-dark);
-
-}
-
-
-.hero-secondary span {
-
-    font-size: 16px;
-
-}
-
-
-.hero-secondary:hover {
-
-    color: var(--blue);
-
-}
-
-
-/* 
-   H LOGO */
-
+/* Ocultamos por completo la caja del logo derecho para que la imagen se vea libre */
 .hero-mark {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 20px;
-
+    display: none;
 }
 
 
 
-
-.hero-logo-circle img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: contain;
-
-}
-
-
-.hero-mark > span {
-
-    text-align: center;
-
-    font-size: 8px;
-
-    line-height: 1.8;
-
-    letter-spacing: 4px;
-
-    color: var(--blue);
-
-}
-
-
-
-.section-heading {
-
-    margin-bottom: 55px;
-
-    display: grid;
-
-    grid-template-columns: 1fr 360px;
-
-    align-items: end;
-
-    gap: 60px;
-
-}
-
-
-.section-heading.compact {
-
-    grid-template-columns: 1fr 400px;
-
-}
-
-
-.section-number {
-
-    display: block;
-
-    margin-bottom: 18px;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-    color: var(--blue);
-
-}
-
-
-.section-heading h2,
-.process-title h2,
-.studio-copy h2,
-.contact-intro h2 {
-
-    font-family: var(--serif);
-
-    font-size: clamp(34px, 5vw, 67px);
-
-    line-height: .96;
-
-    font-weight: 400;
-
-    color: var(--text);
-
-}
-
-
-.section-heading h2 em,
-.process-title h2 em,
-.studio-copy h2 em,
-.contact-intro h2 em {
-
-    font-style: normal;
-
-    color: var(--blue);
-
-}
-
-
-.section-heading > p {
-
-    font-size: 13px;
-
-    line-height: 1.8;
-
-    color: var(--text-soft);
-
-}
-
-
- */
+/* =========================================================
+   SHOWCASE — SLIDER ESTÉTICO (RESPETANDO TUS FUENTES ORIGINALES)
+   ========================================================= */
 
 .showcase-section {
-
-    padding: 105px 5vw;
-
+    padding: 100px 5vw;
     border-bottom: 1px solid var(--line);
-
 }
-
 
 .showcase-slider {
-
     position: relative;
-
     display: flex;
-
     align-items: center;
-
-    gap: 15px;
-
+    gap: 20px;
 }
-
 
 .showcase-window {
-
     width: 100%;
-
     overflow: hidden;
-
 }
-
 
 .showcase-track {
-
     display: flex;
-
     gap: 20px;
-
-    transition:
-        transform .6s cubic-bezier(.22,.61,.36,1);
-
+    transition: transform .6s cubic-bezier(.22,.61,.36,1);
 }
-
 
 .showcase-card {
-
     min-width: calc(50% - 10px);
-
 }
 
-
+/* Solo mejoramos los bordes y la sombra de las tarjetas del carrusel */
 .showcase-image {
-
     position: relative;
-
     aspect-ratio: 9 / 10;
-
     overflow: hidden;
-
     background: #DDD;
-
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
-
 
 .showcase-image img {
-
     width: 100%;
-
     height: 100%;
-
     display: block;
-
     object-fit: cover;
-
-    transition:
-        transform .8s ease;
-
+    transition: transform .8s ease;
 }
-
 
 .showcase-card:hover img {
-
-    transform: scale(1.045);
-
+    transform: scale(1.03);
 }
-
 
 .showcase-overlay {
-
     position: absolute;
-
     left: 0;
-
     right: 0;
-
     bottom: 0;
-
-    padding: 28px;
-
+    padding: 24px;
     display: flex;
-
     flex-direction: column;
-
-    gap: 8px;
-
+    gap: 6px;
     color: white;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(20,25,45,.85)
-        );
-
+    background: linear-gradient(
+        transparent,
+        rgba(20,25,45,.85)
+    );
 }
-
 
 .showcase-overlay span {
-
     font-size: 8px;
-
-    letter-spacing: 3px;
-
+    letter-spacing: 2px;
     color: #DCE5F3;
-
 }
-
 
 .showcase-overlay strong {
-
     font-family: var(--serif);
-
-    font-size: 23px;
-
-    font-weight: 400;
-
-}
-
-
-.showcase-arrow {
-
-    flex-shrink: 0;
-
-    width: 48px;
-
-    height: 48px;
-
-    border: 1px solid rgba(80,101,167,.25);
-
-    background: var(--blue);
-
-    color: white;
-
     font-size: 20px;
-
-    transition: .3s ease;
-
+    font-weight: 400;
 }
 
+/* Botones de navegación originales */
+.showcase-arrow {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(80,101,167,.25);
+    background: var(--blue);
+    color: white;
+    font-size: 16px;
+    display: grid;
+    place-items: center;
+    transition: .3s ease;
+}
 
 .showcase-arrow:hover {
-
     background: var(--blue-dark);
-
-    transform: scale(1.05);
-
 }
 
-
 .showcase-footer {
-
-    margin-top: 18px;
-
-    padding-top: 18px;
-
+    margin-top: 15px;
+    padding-top: 15px;
     display: flex;
-
     justify-content: space-between;
-
     border-top: 1px solid var(--line);
-
     font-size: 8px;
-
     letter-spacing: 2px;
-
     color: var(--text-soft);
+}
 
+@media (max-width: 700px) {
+    .showcase-card {
+        min-width: 100%;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .showcase-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+    .showcase-prev { left: 8px; }
+    .showcase-next { right: 8px; }
 }
 
 
@@ -3530,3 +3267,66 @@ body { font-size: 15px; }
 .selected-file-name.file-selected { color:#2f7252; }
 .selected-file-name.file-error { color:#a73545; }
 .form-success.is-visible { display:block; margin-top:15px; padding:13px 15px; border-left:2px solid var(--blue); background:rgba(80,101,167,.07); font-size:12px; line-height:1.65; }
+
+
+/* =========================================================
+   ESTRUCTURA ORIGINAL DE TÍTULOS Y TEXTOS (TIPOGRAFÍA INTACTA)
+   ========================================================= */
+
+.section-heading {
+    margin-bottom: 55px;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    align-items: end;
+    gap: 60px;
+}
+
+.section-heading.compact {
+    grid-template-columns: 1fr 400px;
+}
+
+.section-number {
+    display: block;
+    margin-bottom: 18px;
+    font-family: var(--sans);
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: var(--blue);
+}
+
+.section-heading h2,
+.process-title h2,
+.studio-copy h2,
+.contact-intro h2 {
+    font-family: var(--serif);
+    font-size: clamp(34px, 5vw, 67px);
+    line-height: .96;
+    font-weight: 400;
+    color: var(--text);
+}
+
+.section-heading h2 em,
+.process-title h2 em,
+.studio-copy h2 em,
+.contact-intro h2 em {
+    font-style: normal;
+    color: var(--blue);
+}
+
+/* El texto pequeño recupera su posición correcta a la derecha, sin encimarse */
+.section-heading > p {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-soft);
+    margin: 0;
+}
+
+/* Responsive para pantallas pequeñas para que el texto baje ordenado */
+@media (max-width: 900px) {
+    .section-heading,
+    .section-heading.compact {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
