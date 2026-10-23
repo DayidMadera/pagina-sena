@@ -677,7 +677,6 @@ img {
     .showcase-next { right: 8px; }
 }
 
-
 /*
    PLANTILLAS
 */
@@ -3328,5 +3327,18 @@ body { font-size: 15px; }
     .section-heading.compact {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+}
+
+/* =========================================================
+   AJUSTE DE IMAGEN COMPLETA PARA CELULARES
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .hero {
+        background-size: cover;
+        /* Ajusta el enfoque al 90% horizontal para mostrar la pared completa */
+        background-position: 90% center;
+        padding: 120px 20px 60px;
     }
 }
